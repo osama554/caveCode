@@ -1,0 +1,470 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Cave theme colors */
+  --color-cave-dark: #0c0a09;
+  --color-cave-darker: #090807;
+  --color-stone-900: #1c1917;
+  --color-stone-800: #292524;
+  --color-copper: #b45309;
+  --color-amber-glow: #d97706;
+  --color-emerald-cave: #047857;
+  --color-crystal-blue: #0ea5e9;
+
+  /* Animations */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-crystal-glow: crystal-glow 3s infinite;
+  --animate-rockfall: rockfall 4s ease-in infinite;
+  --animate-torch-flicker: torch-flicker 0.5s ease-in-out infinite;
+  --animate-drip: drip 8s ease-in-out infinite;
+  --animate-bat-flight: bat-flight 15s linear infinite;
+  --animate-bat-flap: bat-flap 0.5s ease-in-out infinite;
+}
+
+/* Custom animations */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes crystal-glow {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    filter: brightness(0.8);
+  }
+
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes rockfall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes torch-flicker {
+
+  0%,
+  100% {
+    filter: brightness(0.9);
+  }
+
+  50% {
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes drip {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.5;
+  }
+
+  20% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes bat-flight {
+  0% {
+    transform: translateX(-100px) translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateX(25vw) translateY(-20px) rotate(90deg);
+  }
+
+  50% {
+    transform: translateX(50vw) translateY(0) rotate(180deg);
+  }
+
+  75% {
+    transform: translateX(75vw) translateY(20px) rotate(270deg);
+  }
+
+  100% {
+    transform: translateX(100vw) translateY(0) rotate(360deg);
+  }
+}
+
+@keyframes bat-flap {
+
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    transform: scaleY(1.4);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(28, 25, 23, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #b45309, #d97706);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #92400e, #b45309);
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(180, 83, 9, 0.3);
+  color: #d97706;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid #b45309;
+  outline-offset: 2px;
+}
+
+/* Custom utilities */
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-gradient-cave {
+  background: linear-gradient(90deg, #b45309, #d97706, #f59e0b);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gradient-cave {
+  background: linear-gradient(135deg, #1c1917, #292524, #0c0a09);
+}
+
+@utility stone-dark {
+  background: rgba(28, 25, 23, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(180, 83, 9, 0.2);
+}
+
+/* Crystal field - CSS ONLY */
+.crystal-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Individual crystals */
+.crystal {
+  position: absolute;
+  background: linear-gradient(45deg, #0ea5e9, #3b82f6);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  animation: crystal-glow 3s infinite;
+}
+
+/* Falling rocks */
+.falling-rock {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, #57534e, #78716c);
+  border-radius: 50% 50% 50% 0;
+  filter: blur(1px);
+}
+
+/* Stalactites */
+.stalactites {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.stalactite {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, #78716c, #57534e);
+  border-radius: 0 0 2px 2px;
+}
+
+/* Cave background */
+.cave-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(180, 83, 9, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(217, 119, 6, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Mineral background */
+.mineral-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(180, 83, 9, 0.05) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(217, 119, 6, 0.05) 2px, transparent 2px);
+  background-size: 60px 60px, 40px 40px;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Rock overlay */
+.rock-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(45deg, rgba(120, 113, 108, 0.03) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(120, 113, 108, 0.03) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(120, 113, 108, 0.03) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(120, 113, 108, 0.03) 75%);
+  background-size: 20px 20px;
+  mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Bats container */
+.bats-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Individual bat */
+.bat {
+  position: absolute;
+  opacity: 0.4;
+  transform-origin: center center;
+}
+
+/* Bat wings animation container */
+.bat-wings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Bat icon styling */
+.bat-icon {
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+/* Bat hover effect */
+.bat:hover .bat-icon {
+  filter: brightness(1.5) drop-shadow(0 0 3px rgba(217, 119, 6, 0.5));
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .bat {
+    opacity: 0.3;
+  }
+
+  .bat-icon {
+    color: #718096;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .bats-container {
+    display: none;
+  }
+}
+
+/* Additional styles for visibility */
+.crystal-small {
+  width: 2px;
+  height: 2px;
+}
+
+.crystal-medium {
+  width: 3px;
+  height: 3px;
+}
+
+.crystal-large {
+  width: 4px;
+  height: 4px;
+}
+
+.container-padding {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Mobile text adjustments */
+.mobile-text-lg {
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .mobile-text-lg {
+    font-size: 1.125rem;
+  }
+}
+
+/* Company brochure styles */
+.brochure-card {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, rgba(28, 25, 23, 0.9), rgba(41, 37, 36, 0.9)) padding-box,
+    linear-gradient(45deg, #b45309, #d97706, #f59e0b) border-box;
+}
+
+.brochure-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(180, 83, 9, 0.2);
+}
+
+/* Service card styles */
+.service-card {
+  background: linear-gradient(145deg, #1c1917, #292524);
+  border: 1px solid rgba(180, 83, 9, 0.3);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: #d97706;
+  box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15);
+}
+
+/* Testimonial styles */
+.testimonial-card {
+  background: linear-gradient(135deg, rgba(28, 25, 23, 0.8), rgba(41, 37, 36, 0.8));
+  border-left: 4px solid #d97706;
+}
+
+/* Stats counter animation */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-counter {
+  animation: countUp 1s ease-out;
+}
+
+.Toastify__progress-bar-theme--dark {
+  background: linear-gradient(to right, #b45309, #d97706);
+  /* copper → amber-glow */
+}
+
+/* Optional: rounded + smooth */
+.Toastify__progress-bar--wrp {
+  height: 4px;
+  border-radius: 999px;
+}
