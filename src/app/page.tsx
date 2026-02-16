@@ -569,7 +569,7 @@ export default function CaveCodePortfolio() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <Image src="/logo.png" width={50} height={50} alt="caveCode" />
+              <Image src="/logo.jpeg" width={50} height={50} alt="caveCode" />
             </motion.div>
 
             {/* Desktop Navigation */}
