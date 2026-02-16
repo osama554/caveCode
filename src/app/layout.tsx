@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: "CaveCode Portfolio",
     images: [
       {
-        url: "/og-image.png",
+        url: "/logo.jpeg",
         width: 1200,
         height: 630,
         alt: "CaveCode Portfolio - Deep Stack Developer",
